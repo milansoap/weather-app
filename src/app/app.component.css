@@ -104,3 +104,27 @@ eno pod drugo. */
         margin: 32px;
     }
 }
+
+.translation-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.translation-button {
+    background-color: var(--header-background-primary);
+    color: #fff; /* White text color for contrast */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: auto;
+    margin-left:auto;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.translation-button:hover {
+    transform: translateY(-2px); /* Subtle lift on hover */
+}

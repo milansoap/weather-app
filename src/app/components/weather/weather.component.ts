@@ -4,6 +4,7 @@ import { WeatherAPIResponse, WeatherListItem } from 'src/app/models/WeatherAPIRe
 import { WeatherAPIServiceService } from 'src/app/services/weather-apiservice.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { AverageTemperature } from 'src/app/models/AverageTemperature';
+
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.component.html',

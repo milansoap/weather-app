@@ -3,5 +3,9 @@
       <app-header></app-header>
       <div class="resizable-content">
         <app-weather></app-weather>
+        <div class="translation-buttons" *ngIf="!(loading$ | async)">
+          <button class="translation-button" (click)="switchLanguage('en')">English</button>
+          <button class="translation-button" (click)="switchLanguage('sl')">Slovenščina</button>
+        </div>
       </div>
 </div>

@@ -8,12 +8,12 @@
       <div class="weather-info">
         <div class="weather-details">
           <div class="card">
-            Current Temperature is {{currentTemperature}} <br />
-            Population : {{cityPopulation}}
+            {{ 'CURRENT_TEMPERATURE' | translate }} {{ currentTemperature }} C <br />
+            {{ 'POPULATION' | translate }} {{ cityPopulation }}
           </div>
           <div class="card">
             <div *ngFor="let avgTemp of averageTemperatures">
-                <p>Date: {{ avgTemp.date }}, T: {{ avgTemp.averageTemp }} °C</p>
+                <p>{{ 'DATE' | translate }} : {{ avgTemp.date }}, T: {{ avgTemp.averageTemp }} °C</p>
               </div>
           </div>
         </div>
