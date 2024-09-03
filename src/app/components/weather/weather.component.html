@@ -2,34 +2,21 @@
 
 <div *ngIf="!loading && weatherData" class="weather-content">
 
-
     <div class="time">
         Maribor pridobljeno {{dateFetched}}
       </div>
       <div class="weather-info">
         <div class="weather-details">
           <div class="card">
-            Current Temperature is {{currentTemperature}}
-            Description 
+            Current Temperature is {{currentTemperature}} <br />
+            Population : {{cityPopulation}}
           </div>
           <div class="card">
-            Min, max, ...
+            <div *ngFor="let avgTemp of averageTemperatures">
+                <p>Date: {{ avgTemp.date }}, T: {{ avgTemp.averageTemp }} °C</p>
+              </div>
           </div>
         </div>
     </div>
 
-
 </div>
-
-
-<!-- <div *ngIf="!loading && weatherData">
-  <h2>5-Day Weather Forecast for {{ weatherData.city.name }}</h2>
-  <p>Data fetched on: {{ dateFetched }}</p>
-  <ul>
-    <li *ngFor="let item of weatherData.list">
-      <strong>{{ formatTimestamp(item.dt) }}</strong>
-      <div>{{ item.weather[0].description }} - {{ item.main.temp }} °C</div>
-      <div>Wind: {{ item.wind.speed }} m/s</div>
-    </li>
-  </ul>
-</div>  -->
