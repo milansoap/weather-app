@@ -27,7 +27,7 @@ export class WeatherComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLoadingStatus();
-    this.getServiceData();
+    this.getServiceData(false);
   }
 
   // Loading service is acting as a store
@@ -71,29 +71,66 @@ export class WeatherComponent implements OnInit {
     return averageTemps;
   }
   
-  getServiceData() {
+ 
+  getServiceData(forceRefresh: boolean) {
+    // Check if we need to force a refresh (e.g., from the refresh button)
+    this.loadingService.setLoading(true);
 
-    this.loadingService.setLoading(true);  // Start loading
+    if (forceRefresh) {
+        this.fetchWeatherData();  // Force an API call
+        return;
+    } else {
+        // Load cached data first, if available
+        const cachedData = localStorage.getItem('weatherData');
+
+        if (cachedData) {
+            console.log('Loaded from local storage')
+            const parsedData: WeatherAPIResponse = JSON.parse(cachedData);
+            this.weatherData = parsedData;
+            this.currentTemperature = parsedData.list[0].main.temp;
+            this.cityName = parsedData.city.name;
+            this.cityPopulation = parsedData.city.population;
+            this.averageTemperatures = this.calculateAverageTemperatures(parsedData.list);
+            this.loadingService.setLoading(false);
+
+        } else {
+            // No cached data, fetch fresh data
+            // Just one more recheck
+            this.fetchWeatherData();
+        }
+    }
+    
+
+}
+
+// This function fetchs the data from API
+fetchWeatherData() {
 
     this.weatherService.getWeatherData().subscribe(data => {
+
       if (data) {
-        console.log(data)
-        this.currentTemperature = data.list[0].main.temp
-        this.cityName           = data.city.name
-        this.cityPopulation     = data.city.population
+          console.log('Data refreshed via button or we didnt have anything stored in local storage');
+          this.currentTemperature = data.list[0].main.temp;
+          this.cityName = data.city.name;
+          this.cityPopulation = data.city.population;
+
+          // Save new data to localStorage
+          localStorage.setItem('weatherData', JSON.stringify(data));
       }
-      
+
       this.weatherData = data;
       this.averageTemperatures = this.calculateAverageTemperatures(data.list);
       this.loadingService.setLoading(false);
-    });
 
-  }
+  });
+}
 
-  // We make a new request to refresh the data
-  refreshData(): void {
-    this.dateFetched = moment().format('DD.MM.YYYY [ob] HH:mm');
-    this.getServiceData();
-  }
 
+// We make a new request to refresh the data
+refreshData(): void {
+  this.dateFetched = moment().format('DD.MM.YYYY [ob] HH:mm');
+  this.getServiceData(true);
+}
+
+    
 }
