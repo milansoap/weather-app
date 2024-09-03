@@ -48,7 +48,6 @@ export class WeatherComponent implements OnInit {
         this.loading = isLoading;
       });
   }
-  
 
   calculateAverageTemperatures(weatherList: WeatherListItem[]): AverageTemperature[] {
     const tempDataByDate: { [date: string]: number[] } = {};

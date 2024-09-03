@@ -9,3 +9,57 @@
     margin-top: 10px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
+
+/* Polje s časovno značko je široko 320px oziroma če je content manjši, zaseda celotno razpoložljivo */
+/* širino znotraj contenta. Barva teksta naj bo primarna (enaka ozadju headerja – ista spremenljivka). */
+.time {
+    max-width: 320px;
+    text-align: center;
+    color: var(--header-background-primary);
+    margin-bottom: 16px;
+    font-weight: bold;
+}
+
+.weather-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.weather-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+/* Okni s podatki o napovedi sta široki vsak polovico tega. Skupaj zasedajo celotno osnovno višino
+contenta (480-44-32px). Če je content širši ali višji, se držijo skupaj in pozicionirajo vertikalno in
+horizontalno v sredino. Če je okno ožje od osnovne širine, se okni s podatki o napovedi pomakneta
+eno pod drugo. */
+.weather-details .card {
+    margin: 1px;
+    /* border: 1px solid black; */
+    width: 100%;
+}
+
+.weather-details .card p {
+    margin-bottom: 3px;
+    margin-top: 0px;
+}
+
+/* Če je okno ožje od osnovne širine, se okni s podatki o napovedi pomakneta
+eno pod drugo. */
+@media (min-width: 320px) {
+    .weather-details {
+        flex-direction: row;
+    }
+  }
+  
+  @media (max-width: 320px) {
+    .weather-details {
+        flex-direction: column;
+    }
+}
