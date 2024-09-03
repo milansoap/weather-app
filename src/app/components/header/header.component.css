@@ -1,11 +1,11 @@
 .app-header {
     height: 44px;
-    background-color: #e86e1e;
+    background-color: var(--header-background-primary);
     color: white;
     display: flex;
+    position: relative;
     align-items: center;
     justify-content: center;
-    position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
