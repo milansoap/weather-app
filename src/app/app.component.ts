@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { LoadingService } from './services/loading.service';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +9,5 @@ import { Component, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
-  title = 'weather-app';
+  title: string = 'weather-app';
 }
