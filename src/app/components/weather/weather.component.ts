@@ -72,6 +72,7 @@ export class WeatherComponent implements OnInit {
   }
   
   getServiceData() {
+
     this.loadingService.setLoading(true);  // Start loading
 
     this.weatherService.getWeatherData().subscribe(data => {
@@ -83,16 +84,16 @@ export class WeatherComponent implements OnInit {
       }
       
       this.weatherData = data;
-
       this.averageTemperatures = this.calculateAverageTemperatures(data.list);
-      console.log(this.averageTemperatures)
-
       this.loadingService.setLoading(false);
     });
 
   }
 
-  // formatTimestamp(timestamp: number): string {
-  //   return moment.unix(timestamp).format('DD.MM.YYYY [ob] HH:mm');
-  // }
+  // We make a new request to refresh the data
+  refreshData(): void {
+    this.dateFetched = moment().format('DD.MM.YYYY [ob] HH:mm');
+    this.getServiceData();
+  }
+
 }

@@ -5,12 +5,17 @@
     <div class="time">
         Maribor pridobljeno {{dateFetched}}
       </div>
+
       <div class="weather-info">
         <div class="weather-details">
           <div class="card">
             {{ 'CURRENT_TEMPERATURE' | translate }} {{ currentTemperature }} C <br />
             {{ 'POPULATION' | translate }} {{ cityPopulation }}
+            <button class="refresh-button" (click)="refreshData()">
+              {{ 'REFRESH' | translate }}
+            </button>
           </div>
+          
           <div class="card">
             <div *ngFor="let avgTemp of averageTemperatures">
                 <p>{{ 'DATE' | translate }} : {{ avgTemp.date }}, T: {{ avgTemp.averageTemp }} °C</p>
