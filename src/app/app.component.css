@@ -1,4 +1,5 @@
 :root {
+    /* Spremenjivke */
     --background-primary: #f5f5f5;
     --header-background-primary: #e86e1e;
 }
@@ -14,6 +15,8 @@ html, body {
     height: 100%;
 }
 
+/* Osnovna dimenzija okna naj bo 320x480px. Barva ozadja je poljubna (uporabi css oz scss
+spremenljivko */
 .body-container {
     height: 480px;
     width: 320px;
@@ -25,4 +28,73 @@ html, body {
     justify-content: center;
     margin: auto;
 }
+
+/* Če je zaslon večji, se poveča, da
+zasede celotno višino.  */
+/* Zaseda vso prosto višino (minimalno torej 480 – 44 – 2*16 = 404px)  */
+.resizable-content {
+    /* Resizable content je od vseh robov odmaknjen 16px. */
+    margin: 16px;
+    color: var(--header-background-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100% - 60px);
+}
+
+/* Polje s časovno značko je široko 320px oziroma če je content manjši, zaseda celotno razpoložljivo */
+/* širino znotraj contenta. Barva teksta naj bo primarna (enaka ozadju headerja – ista spremenljivka). */
+.time {
+    max-width: 320px;
+    text-align: center;
+    color: var(--header-background-primary);
+    margin-bottom: 16px;
+    font-weight: bold;
+}
+
+.weather-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.weather-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+/* Okni s podatki o napovedi sta široki vsak polovico tega. Skupaj zasedajo celotno osnovno višino
+contenta (480-44-32px). Če je content širši ali višji, se držijo skupaj in pozicionirajo vertikalno in
+horizontalno v sredino. Če je okno ožje od osnovne širine, se okni s podatki o napovedi pomakneta
+eno pod drugo. */
+.weather-details .card {
+    margin: 2px;
+    border: 1px solid black;
+    width: 100%;
+}
+
+/* Če je okno ožje od osnovne širine, se okni s podatki o napovedi pomakneta
+eno pod drugo. */
+@media (min-width: 320px) {
+    .weather-details {
+        flex-direction: row;
+    }
+  }
   
+  @media (max-width: 320px) {
+    .weather-details {
+        flex-direction: column;
+    }
+}
+
+/* Če je okno široko in visoko 768px ali več, povečaj odmik contenta od robov na 32px, */
+@media (min-width: 768px) and (min-height: 768px) {
+    .resizable-content {
+        margin: 32px;
+    }
+}
